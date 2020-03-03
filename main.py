@@ -10,11 +10,14 @@ if __name__ == "__main__":
 
     while True:
         word = representation.read_word()
-        if word:
+        if word is None:
+            auto.verify_word(word)
+            representation.verify_word(auto)
+        elif word == True:
             auto.verify_word(word)
             representation.verify_word(auto)
         elif word == False:
             break
 
-    #auto.print_graph()
-    #auto.verify_word()
+    # auto.print_graph()
+    # auto.verify_word()

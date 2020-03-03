@@ -1,15 +1,15 @@
 from graphics import *
 from random import randint
-from math import sqrt, atan, sin, cos, pi
+from math import atan, sin, cos, pi
 
 white = color_rgb(255, 255, 255)
 red = color_rgb(255, 0, 0)
-green = color_rgb(124,252,0)
+green = color_rgb(124, 252, 0)
+
 
 class Node:
 
     def __init__(self, text, rad, x=0, y=0):
-
         self.center = Point(x, y)
         self.radius = rad
         self.circle = Circle(self.center, self.radius)
@@ -32,10 +32,10 @@ class Node:
         self.color = color_rgb(r, g, b)
         self.circle.setFill(self.color)
 
+
 class Arrow:
 
     def __init__(self, start, finish, value, direction, angle):
-
         self.line = Line(start, finish)
         self.line.setArrow(direction)
         self.arrow_color = white
@@ -43,7 +43,8 @@ class Arrow:
 
         self.center = self.line.getCenter()
         self.angle = angle
-        text_pos = Point(self.center.getX() - cos(self.angle + pi / 2) * 20, self.center.getY() - sin(self.angle + pi / 2) * 20)
+        text_pos = Point(self.center.getX() - cos(self.angle + pi / 2) * 20,
+                         self.center.getY() - sin(self.angle + pi / 2) * 20)
 
         self.text = Text(text_pos, value)
         self.text.setFill(self.arrow_color)
@@ -65,18 +66,20 @@ class Arrow:
         self.arrow_color = value
         self.line.setFill(self.arrow_color)
 
+
 class Reader:
     def __init__(self, point, length):
         self.entry = Entry(point, length)
 
     def get_input(self):
-        return  self.entry.getText()
+        return self.entry.getText()
 
     def set_text(self, text):
         return self.entry.setText(text)
 
     def print_reader(self, win):
         return self.entry.draw(win)
+
 
 class WindowObject:
     def __init__(self, name, width, height):
@@ -121,7 +124,6 @@ class WindowObject:
         click = self.win.getMouse()
         return click.getX(), click.getY()
 
-
     def draw_graph(self, obj):
 
         graph = obj.graph
@@ -148,7 +150,7 @@ class WindowObject:
                 r2 = finish.radius
 
                 if c1x != c2x:
-                    a = atan((c1y - c2y) / (c1x - c2x)) #unghiul liniei fata de ox
+                    a = atan((c1y - c2y) / (c1x - c2x))  # unghiul liniei fata de ox
 
                     if c1x > c2x:
                         startPoint = Point(c1x - r1 * cos(a), c1y - r1 * sin(a))
@@ -181,24 +183,24 @@ class WindowObject:
 
             for edge in obj.edges:
                 if arrow.nodes[0] == edge[0] and arrow.nodes[1] == edge[1]:
-                        arrow.unprint_arrow()
-                        arrow.set_color(green)
-                        arrow.print_arrow(self.win)
-                        break
+                    arrow.unprint_arrow()
+                    arrow.set_color(green)
+                    arrow.print_arrow(self.win)
+                    break
         self.print_result_message(obj)
 
     def read_word(self):
 
         # citirea cuvantului
-        #print (line)
+        # print (line)
         if self.win.getMouse():
-            #print (self.win.checkKey())
+            # print (self.win.checkKey())
             line = self.entry.get_input()
             self.entry.set_text("")
             if line == "*":
                 self.win.close()
                 return False
-            if line == "":
+            if line == ".":
                 word = None
             elif line == line.split()[0]:
                 # daca "cuvantul"(din limbajul automatului) e dat caracter cu caracter (sau daca e dat cuvant cu cuvant)
