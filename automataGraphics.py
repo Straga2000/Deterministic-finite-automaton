@@ -201,12 +201,13 @@ class WindowObject:
                 self.win.close()
                 return False
             if line == ".":
-                word = None
+                return None
             elif line == line.split()[0]:
                 # daca "cuvantul"(din limbajul automatului) e dat caracter cu caracter (sau daca e dat cuvant cu cuvant)
                 word = list(line)
             else:
                 word = line.split()
+            #print (word)
             return word
 
     def search_node(self, elem, obj):

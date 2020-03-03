@@ -12,7 +12,6 @@ class Automate:
         self.edges = []
 
     def verify_word(self, word):
-        print ("bla bla", word)
         self.edges = []
         node = self.start
         # print (word)

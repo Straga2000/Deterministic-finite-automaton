@@ -11,9 +11,9 @@ if __name__ == "__main__":
     while True:
         word = representation.read_word()
         if word is None:
-            auto.verify_word(word)
+            auto.verify_word(None)
             representation.verify_word(auto)
-        elif word == True:
+        if word != False:
             auto.verify_word(word)
             representation.verify_word(auto)
         elif word == False:
