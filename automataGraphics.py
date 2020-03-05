@@ -10,6 +10,7 @@ green = color_rgb(124, 252, 0)
 class Node:
 
     def __init__(self, text, rad, x=0, y=0):
+
         self.center = Point(x, y)
         self.radius = rad
         self.circle = Circle(self.center, self.radius)
@@ -19,16 +20,20 @@ class Node:
         self.color = None
 
     def print_node(self, window):
+
         self.circle.draw(window)
         self.text.draw(window)
 
     def get_center(self):
+
         return self.center
 
     def get_text(self):
+
         return self.text.getText()
 
     def set_color(self, r, g, b):
+
         self.color = color_rgb(r, g, b)
         self.circle.setFill(self.color)
 
@@ -36,6 +41,7 @@ class Node:
 class Arrow:
 
     def __init__(self, start, finish, value, direction, angle):
+
         self.line = Line(start, finish)
         self.line.setArrow(direction)
         self.arrow_color = white
@@ -52,32 +58,40 @@ class Arrow:
         self.nodes = ("", "")
 
     def set_nodes(self, start, finish):
+
         self.nodes = (start, finish)
 
     def print_arrow(self, window):
+
         self.line.draw(window)
         self.text.draw(window)
 
     def unprint_arrow(self):
+
         self.line.undraw()
         self.text.undraw()
 
     def set_color(self, value):
+
         self.arrow_color = value
         self.line.setFill(self.arrow_color)
 
 
 class Reader:
     def __init__(self, point, length):
+
         self.entry = Entry(point, length)
 
     def get_input(self):
+
         return self.entry.getText()
 
     def set_text(self, text):
+
         return self.entry.setText(text)
 
     def print_reader(self, win):
+
         return self.entry.draw(win)
 
 
@@ -102,25 +116,20 @@ class WindowObject:
         self.entry = Reader(Point(self.width / 2, 30), 20)
         self.entry.print_reader(self.win)
 
-    """"
-    def get_random_coord(self, rad):
-        const = 3
-        x = randint(const * rad, self.width - const * rad)
-        y = randint(const * rad, self.height - (const + 5) * rad)
-        return x, y
-    """""
-
     def print_info_message(self, node):
+
         self.infoText.setText("Click pentru a afisa nodul " + node)
         self.infoText.draw(self.win)
 
     def print_result_message(self, obj):
+
         self.infoText.undraw()
         self.infoText.setText(obj.result)
         self.infoText.setSize(15)
         self.infoText.draw(self.win)
 
     def mouse_click(self):
+
         click = self.win.getMouse()
         return click.getX(), click.getY()
 
@@ -150,12 +159,15 @@ class WindowObject:
                 r2 = finish.radius
 
                 if c1x != c2x:
+
                     a = atan((c1y - c2y) / (c1x - c2x))  # unghiul liniei fata de ox
 
                     if c1x > c2x:
+
                         startPoint = Point(c1x - r1 * cos(a), c1y - r1 * sin(a))
                         finishPoint = Point(c2x + r2 * cos(a), c2y + r2 * sin(a))
                     else:
+
                         startPoint = Point(c1x + r1 * cos(a), c1y + r1 * sin(a))
                         finishPoint = Point(c2x - r2 * cos(a), c2y - r2 * sin(a))
                 else:
@@ -163,9 +175,11 @@ class WindowObject:
                     ct = 1.5
 
                     if c1y < c2y:
+
                         startPoint = Point(c1x + ct * r1, c1y + ct * r1)
                         finishPoint = Point(c2x + r2, c2y + r2)
                     else:
+
                         startPoint = Point(c1x - ct * r1, c1y - ct * r1)
                         finishPoint = Point(c2x - r2, c2y - r2)
 
@@ -182,7 +196,9 @@ class WindowObject:
             arrow.print_arrow(self.win)
 
             for edge in obj.edges:
+
                 if arrow.nodes[0] == edge[0] and arrow.nodes[1] == edge[1]:
+
                     arrow.unprint_arrow()
                     arrow.set_color(green)
                     arrow.print_arrow(self.win)
@@ -194,30 +210,39 @@ class WindowObject:
         # citirea cuvantului
         # print (line)
         if self.win.getMouse():
+
             # print (self.win.checkKey())
             line = self.entry.get_input()
             self.entry.set_text("")
+
             if line == "*":
                 self.win.close()
                 return False
-            if line == ".":
+
+            if line == "":
                 return None
+
             elif line == line.split()[0]:
                 # daca "cuvantul"(din limbajul automatului) e dat caracter cu caracter (sau daca e dat cuvant cu cuvant)
                 word = list(line)
+
             else:
                 word = line.split()
             #print (word)
+
             return word
 
     def search_node(self, elem, obj):
 
         for i in range(len(self.nodeList)):
+
             if self.nodeList[i].get_text() == elem:
                 return i
+
         return self.create_node(elem, obj)
 
     def create_arrow(self, start, finish, value, direction, angle):
+
         arrow = Arrow(start, finish, value, direction, angle)
         self.arrowList.append(arrow)
         return arrow

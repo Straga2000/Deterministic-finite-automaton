@@ -1,6 +1,9 @@
-ana are 1
-mere ana 2
-are ana 3
-ana
-mere
-
+a b 1
+b c 2
+c e 1
+e a 3
+d b 2
+a a 4
+e d 2
+a
+e
